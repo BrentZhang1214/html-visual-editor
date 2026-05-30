@@ -6,48 +6,45 @@
     <title>HTML 可视化编辑器 | HTML Visual Editor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400&family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Primary Brand */
-            --color-forest-black: #001e2b;
-            --color-mongodb-green: #00ed64;
-            --color-dark-green: #00684a;
+            /* Mistral Primary Brand */
+            --mistral-orange: #fa520f;
+            --mistral-flame: #fb6424;
+            --block-orange: #ff8105;
             
-            /* Interactive */
-            --color-action-blue: #006cfa;
-            --color-hover-blue: #3860be;
-            --color-teal-active: #1eaedb;
+            /* Mistral Secondary & Accent */
+            --sunshine-900: #ff8a00;
+            --sunshine-700: #ffa110;
+            --sunshine-500: #ffb83e;
+            --sunshine-300: #ffd06a;
+            --block-gold: #ffe295;
+            --bright-yellow: #ffd900;
             
-            /* Neutral Scale */
-            --color-deep-teal: #1c2d38;
-            --color-teal-gray: #3d4f58;
-            --color-cool-gray: #5c6c75;
-            --color-silver-teal: #b8c4c2;
-            --color-light-input: #e8edeb;
+            /* Mistral Surface & Background */
+            --warm-ivory: #fffaeb;
+            --cream: #fff0c2;
+            --pure-white: #ffffff;
+            --mistral-black: #1f1f1f;
             
-            /* Base Colors */
-            --color-white: #ffffff;
-            --color-black: #000000;
+            /* Mistral Shadows - Golden warm shadows */
+            --shadow-golden: rgba(127, 99, 21, 0.12) -8px 16px 39px, 
+                            rgba(127, 99, 21, 0.10) -33px 64px 72px, 
+                            rgba(127, 99, 21, 0.06) -73px 144px 97px;
+            --shadow-standard: rgba(127, 99, 21, 0.15) 0px 3px 9px;
+            --shadow-subtle: rgba(127, 99, 21, 0.08) 0px 2px 4px;
             
-            /* Shadows */
-            --shadow-forest: rgba(0, 30, 43, 0.12) 0px 26px 44px, rgba(0, 0, 0, 0.13) 0px 7px 13px;
-            --shadow-standard: rgba(0, 0, 0, 0.15) 0px 3px 9px;
-            --shadow-subtle: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+            /* Fonts - Noto Sans SC for Chinese */
+            --font-display: 'Noto Sans SC', Arial, ui-sans-serif, system-ui, sans-serif;
+            --font-body: 'Noto Sans SC', Arial, ui-sans-serif, system-ui, sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
             
-            /* Fonts */
-            --font-display: 'Crimson Pro', 'MongoDB Value Serif Fallback', serif;
-            --font-body: 'Inter', 'Euclid Circular A Fallback', system-ui, sans-serif;
-            --font-code: 'JetBrains Mono', 'Source Code Pro Fallback', monospace;
-            
-            /* Radii */
-            --radius-input: 4px;
-            --radius-standard: 8px;
-            --radius-card: 16px;
-            --radius-large: 24px;
-            --radius-image: 30px;
-            --radius-pill: 100px;
-            --radius-full: 9999px;
+            /* Radii - Near-zero for sharp architectural corners */
+            --radius-input: 0px;
+            --radius-standard: 0px;
+            --radius-card: 0px;
+            --radius-large: 0px;
         }
         
         * {
@@ -58,18 +55,19 @@
         
         body {
             font-family: var(--font-body);
-            background: var(--color-forest-black);
-            color: var(--color-white);
+            background: var(--warm-ivory);
+            color: var(--mistral-black);
             height: 100vh;
             display: flex;
             flex-direction: column;
-            line-height: 1.33;
+            line-height: 1.5;
+            font-weight: 400;
         }
         
-        /* Header - Dark Mode */
+        /* Header - Warm Mistral Style */
         .header {
-            background: var(--color-forest-black);
-            border-bottom: 1px solid var(--color-teal-gray);
+            background: var(--warm-ivory);
+            border-bottom: 1px solid var(--sunshine-300);
             padding: 24px 32px;
             display: flex;
             justify-content: space-between;
@@ -78,15 +76,16 @@
         
         .header h1 {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 48px;
             font-weight: 400;
-            color: var(--color-white);
-            line-height: 1.33;
+            color: var(--mistral-black);
+            line-height: 0.95;
+            letter-spacing: -1px;
         }
         
         .header h1 .accent {
-            color: var(--color-mongodb-green);
-            border-bottom: 2px solid var(--color-mongodb-green);
+            color: var(--mistral-orange);
+            border-bottom: 3px solid var(--mistral-orange);
             padding-bottom: 2px;
         }
         
@@ -104,27 +103,28 @@
         
         .lang-switch button {
             font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 400;
             padding: 8px 16px;
-            border-radius: var(--radius-pill);
+            border-radius: var(--radius-standard);
             cursor: pointer;
             transition: all 0.15s ease;
             background: transparent;
-            color: var(--color-light-input);
-            border: 1px solid var(--color-teal-gray);
+            color: var(--mistral-black);
+            border: 1px solid var(--sunshine-300);
+            text-transform: uppercase;
         }
         
         .lang-switch button:hover {
-            background: var(--color-teal-active);
-            color: var(--color-white);
-            border-color: var(--color-teal-active);
+            background: var(--sunshine-700);
+            color: var(--mistral-black);
+            border-color: var(--sunshine-700);
         }
         
         .lang-switch button.active {
-            background: var(--color-mongodb-green);
-            color: var(--color-black);
-            border-color: var(--color-mongodb-green);
+            background: var(--mistral-orange);
+            color: var(--pure-white);
+            border-color: var(--mistral-orange);
         }
         
         .file-actions {
@@ -135,44 +135,43 @@
         .file-actions button {
             font-family: var(--font-body);
             font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 0.135px;
+            font-weight: 400;
+            letter-spacing: normal;
             padding: 12px 24px;
-            border-radius: var(--radius-pill);
+            border-radius: var(--radius-standard);
             cursor: pointer;
             transition: all 0.15s ease;
+            text-transform: uppercase;
         }
         
         .btn-primary {
-            background: var(--color-dark-green);
-            color: var(--color-black);
-            border: 1px solid var(--color-dark-green);
-            box-shadow: rgba(0,0,0,0.06) 0px 1px 6px;
+            background: var(--mistral-black);
+            color: var(--pure-white);
+            border: none;
         }
         
         .btn-primary:hover {
-            transform: scale(1.05);
+            background: var(--mistral-orange);
         }
         
         .btn-primary:active {
-            transform: scale(0.95);
+            transform: scale(0.98);
         }
         
         .btn-secondary {
-            background: var(--color-deep-teal);
-            color: var(--color-cool-gray);
-            border: 1px solid var(--color-teal-gray);
+            background: var(--cream);
+            color: var(--mistral-black);
+            border: none;
         }
         
         .btn-secondary:hover {
-            background: var(--color-teal-active);
-            color: var(--color-white);
+            background: var(--sunshine-700);
         }
         
-        /* Toolbar - Dark Mode */
+        /* Toolbar - Warm Cream Surface */
         .toolbar {
-            background: var(--color-deep-teal);
-            border-bottom: 1px solid var(--color-teal-gray);
+            background: var(--cream);
+            border-bottom: 1px solid var(--sunshine-300);
             padding: 16px 32px;
             display: flex;
             flex-wrap: wrap;
@@ -185,8 +184,8 @@
             font-size: 16px;
             font-weight: 400;
             background: transparent;
-            color: var(--color-light-input);
-            border: 1px solid var(--color-teal-gray);
+            color: var(--mistral-black);
+            border: 1px solid var(--sunshine-300);
             padding: 8px 16px;
             border-radius: var(--radius-standard);
             cursor: pointer;
@@ -194,9 +193,9 @@
         }
         
         .toolbar button:hover {
-            background: var(--color-teal-active);
-            color: var(--color-white);
-            border-color: var(--color-teal-active);
+            background: var(--sunshine-700);
+            color: var(--mistral-black);
+            border-color: var(--sunshine-700);
         }
         
         .toolbar select {
@@ -204,22 +203,22 @@
             font-size: 16px;
             font-weight: 400;
             padding: 8px 16px;
-            border: 1px solid var(--color-teal-gray);
+            border: 1px solid var(--sunshine-300);
             border-radius: var(--radius-standard);
-            background: var(--color-deep-teal);
-            color: var(--color-light-input);
+            background: var(--cream);
+            color: var(--mistral-black);
             cursor: pointer;
         }
         
         .toolbar select:focus {
             outline: none;
-            border-color: var(--color-mongodb-green);
+            border-color: var(--mistral-orange);
         }
         
         .separator {
             width: 1px;
             height: 32px;
-            background: var(--color-teal-gray);
+            background: var(--sunshine-500);
             margin: 0 8px;
         }
         
@@ -233,20 +232,20 @@
         .color-picker-group label {
             font-family: var(--font-code);
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--color-light-input);
+            color: var(--mistral-black);
         }
         
         .color-picker-group input[type="color"] {
             width: 32px;
             height: 32px;
             padding: 0;
-            border: 1px solid var(--color-teal-gray);
+            border: 1px solid var(--sunshine-300);
             border-radius: var(--radius-input);
             cursor: pointer;
-            background: var(--color-deep-teal);
+            background: var(--cream);
         }
         
         .color-picker-group button {
@@ -254,20 +253,68 @@
             padding: 6px 12px;
         }
         
-        /* Main Container - Light Mode */
+        /* Color Palette */
+        .color-palette {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        
+        .color-palette-item {
+            width: 24px;
+            height: 24px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        
+        .color-palette-item:hover {
+            transform: scale(1.15);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .color-palette-item.active {
+            outline: 2px solid var(--mistral-black);
+            outline-offset: 2px;
+        }
+        
+        .color-palette-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .color-palette-section {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .color-palette-section label {
+            font-family: var(--font-code);
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--mistral-black);
+            min-width: 60px;
+        }
+        
+        /* Main Container - Warm Ivory Background */
         .main-container {
             flex: 1;
             display: flex;
             overflow: hidden;
             padding: 24px;
-            background: var(--color-forest-black);
+            background: var(--warm-ivory);
         }
         
         .editor-wrapper {
             flex: 1;
-            background: var(--color-white);
+            background: var(--pure-white);
             border-radius: var(--radius-large);
-            box-shadow: var(--shadow-forest);
+            box-shadow: var(--shadow-golden);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -276,38 +323,38 @@
         /* Tabs */
         .tab-bar {
             display: flex;
-            background: var(--color-white);
-            border-bottom: 1px solid var(--color-silver-teal);
+            background: var(--pure-white);
+            border-bottom: 1px solid var(--sunshine-300);
             padding: 0 24px;
         }
         
         .tab {
             font-family: var(--font-body);
             font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 0.16px;
+            font-weight: 400;
+            letter-spacing: normal;
             padding: 16px 24px;
             cursor: pointer;
             border: none;
             background: transparent;
-            color: var(--color-black);
+            color: var(--mistral-black);
             border-bottom: 2px solid transparent;
             transition: all 0.15s ease;
         }
         
         .tab:hover {
-            color: var(--color-action-blue);
+            color: var(--mistral-orange);
         }
         
         .tab.active {
-            border-bottom-color: var(--color-mongodb-green);
+            border-bottom-color: var(--mistral-orange);
         }
         
         /* Editor */
         .editor-container {
             flex: 1;
             position: relative;
-            background: var(--color-white);
+            background: var(--pure-white);
         }
         
         #visual-editor-iframe {
@@ -327,21 +374,21 @@
             outline: none;
             resize: none;
             display: none;
-            background: var(--color-white);
-            color: var(--color-black);
+            background: var(--pure-white);
+            color: var(--mistral-black);
         }
         
         /* Status Bar */
         .status-bar {
-            background: var(--color-white);
-            border-top: 1px solid var(--color-silver-teal);
+            background: var(--pure-white);
+            border-top: 1px solid var(--sunshine-300);
             padding: 12px 24px;
             font-family: var(--font-code);
             font-size: 14px;
             font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--color-black);
+            color: var(--mistral-black);
             display: flex;
             justify-content: space-between;
         }
@@ -359,7 +406,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 30, 43, 0.8);
+            background: rgba(127, 99, 21, 0.4);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -370,21 +417,22 @@
         }
         
         .modal-content {
-            background: var(--color-deep-teal);
+            background: var(--cream);
             padding: 32px;
             border-radius: var(--radius-card);
-            border: 1px solid var(--color-teal-gray);
-            box-shadow: var(--shadow-forest);
+            border: none;
+            box-shadow: var(--shadow-golden);
             width: 480px;
             max-width: 90%;
         }
         
         .modal-content h3 {
             font-family: var(--font-display);
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 400;
-            color: var(--color-white);
+            color: var(--mistral-black);
             margin-bottom: 24px;
+            line-height: 1.15;
         }
         
         .modal-content input {
@@ -393,21 +441,21 @@
             font-size: 16px;
             font-weight: 400;
             padding: 12px 16px;
-            border: 1px solid var(--color-teal-gray);
+            border: 1px solid hsl(240, 5.9%, 90%);
             border-radius: var(--radius-input);
             outline: none;
             margin-bottom: 24px;
-            background: var(--color-forest-black);
-            color: var(--color-light-input);
+            background: var(--pure-white);
+            color: var(--mistral-black);
             transition: border-color 0.15s ease;
         }
         
         .modal-content input:focus {
-            border-color: var(--color-mongodb-green);
+            border-color: var(--mistral-orange);
         }
         
         .modal-content input::placeholder {
-            color: var(--color-cool-gray);
+            color: var(--sunshine-500);
         }
         
         .modal-content .buttons {
@@ -419,38 +467,51 @@
         .modal-content button {
             font-family: var(--font-body);
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 400;
             padding: 12px 24px;
-            border-radius: var(--radius-pill);
+            border-radius: var(--radius-standard);
             cursor: pointer;
             transition: all 0.15s ease;
+            text-transform: uppercase;
         }
         
         .modal-content button.cancel {
-            background: var(--color-forest-black);
-            color: var(--color-cool-gray);
-            border: 1px solid var(--color-teal-gray);
+            background: transparent;
+            color: var(--mistral-black);
+            border: 1px solid var(--sunshine-300);
         }
         
         .modal-content button.cancel:hover {
-            background: var(--color-deep-teal);
+            background: var(--cream);
         }
         
         .modal-content button.confirm {
-            background: var(--color-dark-green);
-            color: var(--color-black);
-            border: 1px solid var(--color-dark-green);
+            background: var(--mistral-black);
+            color: var(--pure-white);
+            border: none;
         }
         
         .modal-content button.confirm:hover {
-            transform: scale(1.05);
+            background: var(--mistral-orange);
         }
         
         /* Focus Styles */
         button:focus-visible,
         select:focus-visible {
-            outline: 2px solid var(--color-mongodb-green);
+            outline: 2px solid var(--mistral-orange);
             outline-offset: 2px;
+        }
+        
+        /* Mistral Block Identity - Decorative gradient bar */
+        .mistral-block {
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--bright-yellow) 0%, 
+                var(--block-gold) 20%, 
+                var(--sunshine-700) 40%, 
+                var(--block-orange) 60%, 
+                var(--mistral-flame) 80%, 
+                var(--mistral-orange) 100%);
         }
         
         /* Responsive */
@@ -460,7 +521,7 @@
             }
             
             .header h1 {
-                font-size: 24px;
+                font-size: 32px;
             }
             
             .toolbar {
@@ -484,6 +545,9 @@
     </style>
 </head>
 <body>
+    <!-- Mistral Block Identity Bar -->
+    <div class="mistral-block"></div>
+    
     <div class="header">
         <h1>HTML <span class="accent" data-i18n="editor">可视化编辑器</span></h1>
         <div class="header-right">
@@ -535,16 +599,53 @@
         
         <div class="separator"></div>
         
-        <div class="color-picker-group">
-            <label data-i18n="textColor">文字色</label>
-            <input type="color" id="text-color" onchange="execCmdWithArg('foreColor', this.value)" title="文字颜色 / Text Color">
-            <button onclick="execCmd('removeFormat')" title="清除文字颜色 / Clear Text Color" data-i18n="clear">清除</button>
-        </div>
-        
-        <div class="color-picker-group">
-            <label data-i18n="bgColor">背景色</label>
-            <input type="color" id="bg-color" onchange="execCmdWithArg('hiliteColor', this.value)" title="背景颜色 / Background Color">
-            <button onclick="execCmdWithArg('hiliteColor', 'transparent')" title="清除背景颜色 / Clear Background Color" data-i18n="clear">清除</button>
+        <div class="color-palette-container">
+            <div class="color-palette-section">
+                <label data-i18n="textColor">文字色</label>
+                <div class="color-palette" id="text-color-palette">
+                    <!-- Mistral Colors -->
+                    <button class="color-palette-item" style="background: #1f1f1f" onclick="setTextColor('#1f1f1f', this)" title="Mistral Black"></button>
+                    <button class="color-palette-item" style="background: #fa520f" onclick="setTextColor('#fa520f', this)" title="Mistral Orange"></button>
+                    <button class="color-palette-item" style="background: #fb6424" onclick="setTextColor('#fb6424', this)" title="Mistral Flame"></button>
+                    <button class="color-palette-item" style="background: #ffa110" onclick="setTextColor('#ffa110', this)" title="Sunshine 700"></button>
+                    <!-- Standard Colors -->
+                    <button class="color-palette-item" style="background: #ffffff; border: 1px solid #ddd" onclick="setTextColor('#ffffff', this)" title="White"></button>
+                    <button class="color-palette-item" style="background: #e74c3c" onclick="setTextColor('#e74c3c', this)" title="Red"></button>
+                    <button class="color-palette-item" style="background: #3498db" onclick="setTextColor('#3498db', this)" title="Blue"></button>
+                    <button class="color-palette-item" style="background: #2ecc71" onclick="setTextColor('#2ecc71', this)" title="Green"></button>
+                    <button class="color-palette-item" style="background: #9b59b6" onclick="setTextColor('#9b59b6', this)" title="Purple"></button>
+                    <button class="color-palette-item" style="background: #f39c12" onclick="setTextColor('#f39c12', this)" title="Yellow"></button>
+                    <button class="color-palette-item" style="background: #1abc9c" onclick="setTextColor('#1abc9c', this)" title="Teal"></button>
+                    <button class="color-palette-item" style="background: #34495e" onclick="setTextColor('#34495e', this)" title="Dark Gray"></button>
+                    <button class="color-palette-item" style="background: #7f8c8d" onclick="setTextColor('#7f8c8d', this)" title="Gray"></button>
+                    <input type="color" id="text-color" onchange="setTextColor(this.value)" title="自定义颜色 / Custom Color" style="width: 24px; height: 24px; border: 1px solid var(--sunshine-300); cursor: pointer;">
+                </div>
+                <button onclick="execCmd('removeFormat')" title="清除文字颜色 / Clear Text Color" data-i18n="clear" style="padding: 4px 8px; font-size: 12px;">清除</button>
+            </div>
+            
+            <div class="color-palette-section">
+                <label data-i18n="bgColor">背景色</label>
+                <div class="color-palette" id="bg-color-palette">
+                    <!-- Mistral Colors -->
+                    <button class="color-palette-item" style="background: #fffaeb" onclick="setBgColor('#fffaeb', this)" title="Warm Ivory"></button>
+                    <button class="color-palette-item" style="background: #fff0c2" onclick="setBgColor('#fff0c2', this)" title="Cream"></button>
+                    <button class="color-palette-item" style="background: #ffd900" onclick="setBgColor('#ffd900', this)" title="Bright Yellow"></button>
+                    <button class="color-palette-item" style="background: #ffa110" onclick="setBgColor('#ffa110', this)" title="Sunshine 700"></button>
+                    <button class="color-palette-item" style="background: #fa520f" onclick="setBgColor('#fa520f', this)" title="Mistral Orange"></button>
+                    <!-- Standard Colors -->
+                    <button class="color-palette-item" style="background: #ffffff; border: 1px solid #ddd" onclick="setBgColor('#ffffff', this)" title="White"></button>
+                    <button class="color-palette-item" style="background: #ffebee" onclick="setBgColor('#ffebee', this)" title="Light Red"></button>
+                    <button class="color-palette-item" style="background: #e3f2fd" onclick="setBgColor('#e3f2fd', this)" title="Light Blue"></button>
+                    <button class="color-palette-item" style="background: #e8f5e9" onclick="setBgColor('#e8f5e9', this)" title="Light Green"></button>
+                    <button class="color-palette-item" style="background: #f3e5f5" onclick="setBgColor('#f3e5f5', this)" title="Light Purple"></button>
+                    <button class="color-palette-item" style="background: #fff8e1" onclick="setBgColor('#fff8e1', this)" title="Light Yellow"></button>
+                    <button class="color-palette-item" style="background: #e0f2f1" onclick="setBgColor('#e0f2f1', this)" title="Light Teal"></button>
+                    <button class="color-palette-item" style="background: #eceff1" onclick="setBgColor('#eceff1', this)" title="Light Gray"></button>
+                    <button class="color-palette-item" style="background: #1f1f1f" onclick="setBgColor('#1f1f1f', this)" title="Dark"></button>
+                    <input type="color" id="bg-color" onchange="setBgColor(this.value)" title="自定义颜色 / Custom Color" style="width: 24px; height: 24px; border: 1px solid var(--sunshine-300); cursor: pointer;">
+                </div>
+                <button onclick="execCmdWithArg('hiliteColor', 'transparent')" title="清除背景颜色 / Clear Background Color" data-i18n="clear" style="padding: 4px 8px; font-size: 12px;">清除</button>
+            </div>
         </div>
         
         <div class="separator"></div>
@@ -770,15 +871,20 @@
                 <head>
                     <style>
                         body {
-                            font-family: 'Inter', sans-serif;
+                            font-family: 'Noto Sans SC', Arial, ui-sans-serif, system-ui, sans-serif;
                             padding: 32px;
-                            line-height: 1.6;
-                            color: #000000;
-                            font-weight: 300;
+                            line-height: 1.5;
+                            color: #1f1f1f;
+                            font-weight: 400;
                         }
                         h1, h2, h3, h4 {
-                            font-family: 'Crimson Pro', serif;
+                            font-family: 'Noto Sans SC', Arial, ui-sans-serif, system-ui, sans-serif;
                             font-weight: 400;
+                        }
+                        h1 {
+                            font-size: 48px;
+                            line-height: 0.95;
+                            letter-spacing: -1px;
                         }
                     </style>
                 </head>
@@ -803,6 +909,32 @@
         function execCmdWithArg(command, arg) {
             iframe.contentDocument.execCommand(command, false, arg);
             iframe.contentDocument.body.focus();
+        }
+        
+        // 设置文字颜色
+        function setTextColor(color, element) {
+            execCmdWithArg('foreColor', color);
+            
+            // 更新选中状态
+            document.querySelectorAll('#text-color-palette .color-palette-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element && element.classList) {
+                element.classList.add('active');
+            }
+        }
+        
+        // 设置背景颜色
+        function setBgColor(color, element) {
+            execCmdWithArg('hiliteColor', color);
+            
+            // 更新选中状态
+            document.querySelectorAll('#bg-color-palette .color-palette-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element && element.classList) {
+                element.classList.add('active');
+            }
         }
         
         // 切换标签
